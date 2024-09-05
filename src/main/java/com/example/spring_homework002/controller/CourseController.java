@@ -61,10 +61,23 @@ public class CourseController {
         ApiResponse<?> apiResponse = ApiResponse.builder()
                 .message("Create Course Successfully")
                 .payload(courseService.addCourse(courseRequest))
+                .status(HttpStatus.CREATED)
+                .time(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCourseById(@PathVariable("id") Integer id, @RequestBody CourseRequest courseRequest){
+        courseService.updateCourseById(id, courseRequest);
+        ApiResponse<?> apiResponse = ApiResponse.builder()
+                .message("Update Course Successfully by Id: " + id)
+                .payload(courseService.updateCourseById(id, courseRequest))
                 .status(HttpStatus.OK)
                 .time(LocalDateTime.now())
                 .build();
         return ResponseEntity.ok(apiResponse);
     }
+
 
 }

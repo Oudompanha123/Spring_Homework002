@@ -53,4 +53,10 @@ public class CourseServiceImpl implements CourseService{
         return modelMapper.map(course, CourseResponse.class);
     }
 
+    @Override
+    public CourseResponse updateCourseById(Integer id, CourseRequest courseRequest) {
+        Course course = courseRepository.updateCourseById(id, courseRequest);
+        return modelMapper.map(course, CourseResponse.class);
+    }
+
 }

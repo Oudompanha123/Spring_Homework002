@@ -38,4 +38,12 @@ public interface CourseRepository {
     """)
     @ResultMap("courseMapping")
     Course addCourse(@Param("course") CourseRequest courseRequest);
+
+    @Select("""
+        UPDATE public.course SET course_name = #{course.courseName}, description = #{course.description}
+        WHERE course_id = #{id}
+        RETURNING *;
+    """)
+    @ResultMap("courseMapping")
+    Course updateCourseById(Integer id, @Param("course") CourseRequest courseRequest);
 }
