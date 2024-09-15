@@ -46,4 +46,13 @@ public interface CourseRepository {
     """)
     @ResultMap("courseMapping")
     Course updateCourseById(Integer id, @Param("course") CourseRequest courseRequest);
+
+    @Select("""
+        SELECT *
+        FROM course c
+        JOIN student_course sc ON c.course_id = sc.course_id
+        WHERE sc.student_id = #{studentId};
+    """)
+    @ResultMap("courseMapping")
+    List<Course> findCoursesByStudentId(Integer studentId);
 }

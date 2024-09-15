@@ -1,9 +1,11 @@
 package com.example.spring_homework002.service;
 
 import com.example.spring_homework002.model.Course;
+import com.example.spring_homework002.model.Student;
 import com.example.spring_homework002.model.dto.request.CourseRequest;
 import com.example.spring_homework002.model.dto.response.CourseResponse;
 import com.example.spring_homework002.repository.CourseRepository;
+import com.example.spring_homework002.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,12 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService{
 
     private final CourseRepository courseRepository;
+    private final StudentRepository studentRepository;
     private  final ModelMapper modelMapper;
 
-    public CourseServiceImpl(CourseRepository courseRepository, ModelMapper modelMapper) {
+    public CourseServiceImpl(CourseRepository courseRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
         this.courseRepository = courseRepository;
+        this.studentRepository = studentRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -58,5 +62,10 @@ public class CourseServiceImpl implements CourseService{
         Course course = courseRepository.updateCourseById(id, courseRequest);
         return modelMapper.map(course, CourseResponse.class);
     }
+
+//    public Object findCoursesByStudentId(){
+//        Student student = studentRepository.findStuById();
+//        return courseRepository.findCoursesByStudentId(studeId);
+//    }
 
 }
