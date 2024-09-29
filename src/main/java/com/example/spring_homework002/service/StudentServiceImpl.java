@@ -35,6 +35,13 @@ public class StudentServiceImpl implements StudentService{
     }
     @Override
     public Student createStudent(StudentRequest studentRequest) {
-        return studentRepository.createStudent(studentRequest);
+        Integer studentId = studentRepository.insertStudent(studentRequest);
+        System.out.println("Id of student: " + studentId);
+        System.out.println("Add Student: " + studentRequest);
+
+        for(Integer courseId : studentRequest.getCourseId()){
+            studentRepository.insertIntoStudentCourse(studentId, courseId);
+        }
+        return studentRepository.getStudentById(studentId);
     }
 }

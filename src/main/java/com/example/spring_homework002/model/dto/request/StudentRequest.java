@@ -13,12 +13,12 @@ public class StudentRequest {
     private String studentName;
     private String email;
     private String phoneNumber;
-    private List<CourseRequest> courseRequests;
+    private List<Integer> courseId;
 
-    public StudentRequest(String studentName, String email, String phoneNumber, List<CourseRequest> courseRequests) {
+    public StudentRequest(String studentName, String email, String phoneNumber, List<Integer> courseId) {
         this.studentName = studentName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.courseRequests = courseRequests;
+        this.courseId = courseId;
     }
 }

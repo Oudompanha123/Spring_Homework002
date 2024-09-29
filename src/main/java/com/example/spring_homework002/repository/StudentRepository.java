@@ -16,7 +16,7 @@ public interface StudentRepository {
             @Result(property = "studentId", column = "student_id"),
             @Result(property = "studentName", column = "student_name"),
             @Result(property = "phoneNumber", column = "phone_number"),
-            @Result(property = "courses", column = "student_id", many = @Many(select = "com.example.spring_homework002.repository.CourseRepository.findCoursesByStudentId"))
+            @Result(property = "course", column = "student_id", many = @Many(select = "com.example.spring_homework002.repository.CourseRepository.findCoursesByStudentId"))
     })
     List<Student> getAllStudent();
 
@@ -35,8 +35,14 @@ public interface StudentRepository {
     @Select("""
         INSERT INTO student (student_name, email, phone_number)
         VALUES (#{student.studentName}, #{student.email}, #{student.phoneNumber})
-        RETURNING *;
+        RETURNING student_id;
     """)
     @ResultMap("studentMapping")
-    Student createStudent(@Param("student") StudentRequest studentRequest);
+    Integer insertStudent(@Param("student") StudentRequest studentRequest);
+
+    @Insert("""
+        INSERT INTO student_course (student_id, course_id)
+        VALUES (#{studentId}, #{courseId});
+    """)
+    void insertIntoStudentCourse(Integer studentId, Integer courseId);
 }
