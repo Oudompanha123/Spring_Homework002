@@ -4,6 +4,7 @@ import com.example.spring_homework002.model.Student;
 import com.example.spring_homework002.model.dto.request.StudentRequest;
 import com.example.spring_homework002.repository.StudentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.print.Book;
 import java.util.List;
@@ -29,19 +30,25 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
+    @Transactional
     public Student deleteStudentById(Integer id) {
         System.out.println("Student: " + studentRepository.deleteStudent(id));
         return studentRepository.deleteStudent(id);
     }
     @Override
+    @Transactional
     public Student createStudent(StudentRequest studentRequest) {
-        Integer studentId = studentRepository.insertStudent(studentRequest);
-        System.out.println("Id of student: " + studentId);
+        Student student = studentRepository.insertStudent(studentRequest);
+        System.out.println("Id of student: " + student.getStudentId());
         System.out.println("Add Student: " + studentRequest);
 
-        for(Integer courseId : studentRequest.getCourseId()){
-            studentRepository.insertIntoStudentCourse(studentId, courseId);
-        }
-        return studentRepository.getStudentById(studentId);
+      if(studentRequest.getCourseId() != null){
+           for(Integer courseId : studentRequest.getCourseId()){
+             System.out.println("Get course Id: " + courseId);
+             studentRepository.insertIntoStudentCourse(student.getStudentId(), courseId);
+          }
+      }
+        return studentRepository.getStudentById(student.getStudentId());
+        //return null;
     }
 }
