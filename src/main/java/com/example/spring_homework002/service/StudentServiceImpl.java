@@ -16,24 +16,19 @@ public class StudentServiceImpl implements StudentService{
     public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
-
     @Override
     public List<Student> getAllStudent() {
         studentRepository.getAllStudent();
         return studentRepository.getAllStudent();
     }
-
-
     @Override
     public Student getStudentById(Integer id) {
         return studentRepository.getStudentById(id);
     }
-
     @Override
     @Transactional
-    public Student deleteStudentById(Integer id) {
-        System.out.println("Student: " + studentRepository.deleteStudent(id));
-        return studentRepository.deleteStudent(id);
+    public void deleteStudentById(Integer id) {
+        System.out.println("Student: " + studentRepository.deleteStudentById(id));
     }
     @Override
     @Transactional
@@ -50,5 +45,21 @@ public class StudentServiceImpl implements StudentService{
       }
         return studentRepository.getStudentById(student.getStudentId());
         //return null;
+    }
+    @Override
+    @Transactional
+    public Student updateStudent(Integer id, StudentRequest studentRequest) {
+        Student student = studentRepository.updateStudentById(id, studentRequest);
+        System.out.println("New Student info: " + student);
+        System.out.println("Id of student: " + id);
+        System.out.println("Update Student: " + studentRequest);
+
+      if(studentRequest.getCourseId() != null){
+          for(Integer courseId : studentRequest.getCourseId()){
+              System.out.println("Get course Id: " + courseId);
+              studentRepository.updateIntoStudentCourse(id, courseId);
+          }
+      }
+        return studentRepository.getStudentById(id);
     }
 }

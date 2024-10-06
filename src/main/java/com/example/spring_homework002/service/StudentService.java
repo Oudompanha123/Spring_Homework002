@@ -12,7 +12,9 @@ public interface StudentService {
 
     Student getStudentById(Integer id);
 
-    Student deleteStudentById(Integer id);
+    void deleteStudentById(Integer id);
 
     Student createStudent(StudentRequest studentRequest);
+
+    Student updateStudent(Integer id, StudentRequest studentRequest);
 }

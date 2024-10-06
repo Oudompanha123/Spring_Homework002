@@ -30,7 +30,7 @@ public interface StudentRepository {
         DELETE FROM student WHERE student_id = #{studentId}
     """)
     @ResultMap("studentMapping")
-    Student deleteStudent(Integer studentId);
+    Student deleteStudentById(Integer studentId);
 
     @Select("""
         INSERT INTO student (student_name, email, phone_number)
@@ -45,4 +45,19 @@ public interface StudentRepository {
         VALUES (#{studentId}, #{courseId});
     """)
     void insertIntoStudentCourse(@Param("studentId") Integer studentId, @Param("courseId") Integer courseId);
+
+    @Select("""
+        UPDATE student
+        SET student_name = #{student.studentName}, email = #{student.email}, phone_number = #{student.phoneNumber}
+        WHERE student_id = #{id}
+        RETURNING *;
+    """)
+    Student updateStudentById(Integer id, @Param("student") StudentRequest studentRequest);
+
+    @Update("""
+        UPDATE student_course
+        SET course_id = #{courseId}
+        WHERE student_id = #{studentId}
+    """)
+    void updateIntoStudentCourse(Integer studentId, Integer courseId);
 }

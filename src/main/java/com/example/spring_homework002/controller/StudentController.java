@@ -65,4 +65,15 @@ public class StudentController {
                 .build();
         return ResponseEntity.ok(apiResponse);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateStudent(@PathVariable("id") Integer id, StudentRequest studentRequest){
+        ApiResponse<?> apiResponse = ApiResponse.builder()
+                .message("Update book by ID: " + id)
+                .payload(studentService.updateStudent(id, studentRequest))
+                .status(HttpStatus.OK)
+                .time(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(apiResponse);
+    }
 }
