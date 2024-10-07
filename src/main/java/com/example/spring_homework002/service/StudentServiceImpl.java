@@ -28,7 +28,12 @@ public class StudentServiceImpl implements StudentService{
     @Override
     @Transactional
     public void deleteStudentById(Integer id) {
-        System.out.println("Student: " + studentRepository.deleteStudentById(id));
+        if(studentRepository.getStudentById(id) != null) {
+            System.out.println("Student: " + studentRepository.deleteStudentById(id));
+        }else {
+            System.out.println("Student " + id + " not found" );
+        }
+
     }
     @Override
     @Transactional
