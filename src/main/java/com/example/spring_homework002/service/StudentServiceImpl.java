@@ -62,7 +62,7 @@ public class StudentServiceImpl implements StudentService{
       if(studentRequest.getCourseId() != null){
           for(Integer courseId : studentRequest.getCourseId()){
               System.out.println("Get course Id: " + courseId);
-              studentRepository.updateIntoStudentCourse(id, courseId);
+              studentRepository.updateIntoStudentCourse(student.getStudentId(), courseId);
           }
       }
         return studentRepository.getStudentById(id);
