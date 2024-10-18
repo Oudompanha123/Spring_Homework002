@@ -4,6 +4,7 @@ import com.example.spring_homework002.model.Student;
 import com.example.spring_homework002.model.dto.request.StudentRequest;
 import com.example.spring_homework002.model.dto.response.ApiResponse;
 import com.example.spring_homework002.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +13,13 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1/students")
+@RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
+//    public StudentController(StudentService studentService) {
+//        this.studentService = studentService;
+//    }
 
     @GetMapping("")
     public ResponseEntity<?> getAllStudent(){
