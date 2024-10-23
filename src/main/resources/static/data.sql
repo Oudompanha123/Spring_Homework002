@@ -37,6 +37,15 @@ CREATE TABLE student_course (
     FOREIGN KEY (course_id) REFERENCES course(course_id)
 );
 
+CREATE TABLE product (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2),
+    specifications JSONB,
+    in_stock BOOLEAN DEFAULT true
+);
+
+
 ALTER TABLE student_course
     ADD CONSTRAINT fk_student_course_student
         FOREIGN KEY (student_id)
