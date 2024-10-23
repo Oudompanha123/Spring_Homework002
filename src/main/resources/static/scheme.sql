@@ -5,6 +5,6 @@ INSERT INTO product (name, price, specifications, in_stock)
 VALUES (
            'Test Product',
            99.99,
-           '[{"color": "red", "size": "large"}, {"material": "leather", "waterproof": true}]'::jsonb,
+           '[{"color": "red", "size": "large"}, {"material": "leather", "waterproof": true}]',
            true
        );
