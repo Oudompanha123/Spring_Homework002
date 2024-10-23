@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -18,11 +19,11 @@ public class Product {
     private BigDecimal price;
 
     //@Column(columnDefinition = "jsonb")
-    private Map<String, Object> specifications; // JSONB field
+    private List<Map<String, Object>> specifications; // JSONB field
 
     private Boolean inStock;
 
-    public Product(Long id, String name, BigDecimal price, Map<String, Object> specifications, Boolean inStock) {
+    public Product(Long id, String name, BigDecimal price, List<Map<String, Object>> specifications, Boolean inStock) {
         this.id = id;
         this.name = name;
         this.price = price;
