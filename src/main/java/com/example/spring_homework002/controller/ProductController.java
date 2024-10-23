@@ -1,14 +1,14 @@
 package com.example.spring_homework002.controller;
 
 import com.example.spring_homework002.model.Product;
+import com.example.spring_homework002.model.dto.request.ProductRequest;
 import com.example.spring_homework002.model.dto.response.ApiResponse;
 import com.example.spring_homework002.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +26,17 @@ public class ProductController {
         ApiResponse<?> response = ApiResponse.builder()
                 .message("Get all products")
                 .payload(products)
+                .status(HttpStatus.OK)
+                .time(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("")
+    public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequest productRequest) {
+        Product product = productService.createProduct(productRequest);
+        ApiResponse<?> response = ApiResponse.builder()
+                .message("Add new product")
+                .payload(product)
                 .status(HttpStatus.OK)
                 .time(LocalDateTime.now())
                 .build();

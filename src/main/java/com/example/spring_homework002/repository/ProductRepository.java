@@ -2,10 +2,8 @@ package com.example.spring_homework002.repository;
 
 import com.example.spring_homework002.config.ListJsonbTypeHandler;
 import com.example.spring_homework002.model.Product;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import com.example.spring_homework002.model.dto.request.ProductRequest;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -23,4 +21,11 @@ public interface ProductRepository {
             @Result(property = "inStock", column = "in_stock")
     })
     List<Product> getAllProducts();
+
+    @Select("""
+            INSERT INTO product (name, price, specifications, in_stock)
+                VALUES (#{product.name}, #{product.price}, #{product.specifications}, #{product.inStock}) RETURNING *;
+            """)
+    @ResultMap("productMapping")
+    Product createProduct(@Param("product") ProductRequest productRequest);
 }
