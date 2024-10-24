@@ -32,7 +32,7 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
     @PostMapping("")
-    public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequest productRequest) {
+    public ResponseEntity<?> createProduct(@RequestBody ProductRequest productRequest) {
         Product product = productService.createProduct(productRequest);
         ApiResponse<?> response = ApiResponse.builder()
                 .message("Add new product")

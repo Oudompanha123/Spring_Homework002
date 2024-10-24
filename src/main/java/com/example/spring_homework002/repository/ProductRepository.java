@@ -24,7 +24,8 @@ public interface ProductRepository {
 
     @Select("""
             INSERT INTO product (name, price, specifications, in_stock)
-                VALUES (#{product.name}, #{product.price}, #{product.specifications}, #{product.inStock}) RETURNING *;
+                VALUES (#{product.name}, #{product.price}, #{product.specifications, jdbcType=OTHER}, #{product.inStock})
+                RETURNING *;
             """)
     @ResultMap("productMapping")
     Product createProduct(@Param("product") ProductRequest productRequest);
