@@ -1,5 +1,6 @@
 package com.example.spring_homework002.model.dto.request;
 
+import com.example.spring_homework002.model.Specification;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,11 +17,11 @@ public class ProductRequest {
 
     private BigDecimal price;
 
-    private List<Map<String, Object>> specifications; // JSONB field
+    private List<Specification> specifications; // JSONB field
 
     private Boolean inStock;
 
-    public ProductRequest(String name, BigDecimal price, List<Map<String, Object>> specifications, Boolean inStock) {
+    public ProductRequest(String name, BigDecimal price, List<Specification> specifications, Boolean inStock) {
         this.name = name;
         this.price = price;
         this.specifications = specifications;

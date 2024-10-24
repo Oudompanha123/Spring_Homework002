@@ -19,11 +19,11 @@ public class Product {
     private BigDecimal price;
 
     //@Column(columnDefinition = "jsonb")
-    private List<Map<String, Object>> specifications; // JSONB field
+    private List<Specification> specifications; // JSONB field
 
     private Boolean inStock;
 
-    public Product(Long id, String name, BigDecimal price, List<Map<String, Object>> specifications, Boolean inStock) {
+    public Product(Long id, String name, BigDecimal price, List<Specification> specifications, Boolean inStock) {
         this.id = id;
         this.name = name;
         this.price = price;
