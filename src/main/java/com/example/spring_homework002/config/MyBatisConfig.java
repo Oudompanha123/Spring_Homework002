@@ -21,9 +21,6 @@ public class MyBatisConfig {
         configuration.getTypeHandlerRegistry().register(ListJsonbTypeHandler.class);
         sessionFactory.setConfiguration(configuration);
 
-        // If you have mapper XML files, uncomment and modify the following line
-        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
-
         return sessionFactory.getObject();
     }
 }
