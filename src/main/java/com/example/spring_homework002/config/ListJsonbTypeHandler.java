@@ -26,7 +26,7 @@ public class ListJsonbTypeHandler extends BaseTypeHandler<List<Map<String, Objec
     public void setNonNullParameter(PreparedStatement ps, int i, List<Map<String, Object>> parameter, JdbcType jdbcType) throws SQLException {
         try {
             System.out.println("Inserting List as JSON: " + parameter);
-            ps.setString(i, OBJECT_MAPPER.writeValueAsString(parameter));
+            ps.setObject(i, OBJECT_MAPPER.writeValueAsString(parameter), java.sql.Types.OTHER);
         } catch (JsonProcessingException e) {
             throw new SQLException("Error converting List to JSON", e);
         }

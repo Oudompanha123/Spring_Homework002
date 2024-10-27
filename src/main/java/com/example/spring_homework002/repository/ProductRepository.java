@@ -22,11 +22,11 @@ public interface ProductRepository {
     })
     List<Product> getAllProducts();
 
-    @Select("""
+    @Insert("""
             INSERT INTO product (name, price, specifications, in_stock)
-                VALUES (#{product.name}, #{product.price}, #{product.specifications, jdbcType=OTHER}, #{product.inStock})
-                RETURNING *;
+                VALUES (#{product.name}, #{product.price}, #{product.specifications, jdbcType=OTHER}, #{product.inStock});
             """)
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @ResultMap("productMapping")
-    Product createProduct(@Param("product") ProductRequest productRequest);
+    void createProduct(@Param("product") ProductRequest productRequest);
 }

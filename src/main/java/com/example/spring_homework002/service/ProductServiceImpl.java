@@ -24,17 +24,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getAllProducts();
     }
     @Override
-    public Product createProduct(ProductRequest productRequest) {
-        System.out.println("Get new product: " + productRepository.createProduct(productRequest));
-        ProductRequest productRequest1 = new ProductRequest();
-        productRequest1.setName("Wireless Mouse");
-        productRequest1.setPrice(new BigDecimal("29.99"));
-        productRequest1.setSpecifications(List.of(
-                Map.of("color", "black", "batteryLife", "12 months", "connectionType", "Bluetooth")
-        ));
-        productRequest1.setInStock(true);
-        System.out.println("Create product: " + productRequest1);
-        return null;
-        //return productRepository.createProduct(productRequest1);
+    public void createProduct(ProductRequest productRequest) {
+        productRepository.createProduct(productRequest);
     }
 }
