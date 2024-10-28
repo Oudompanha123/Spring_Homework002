@@ -45,6 +45,8 @@ CREATE TABLE product (
     in_stock BOOLEAN DEFAULT true
 );
 
+ALTER TABLE product
+    ALTER COLUMN specifications TYPE JSONB;
 
 ALTER TABLE student_course
     ADD CONSTRAINT fk_student_course_student

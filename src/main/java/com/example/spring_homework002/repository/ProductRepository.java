@@ -23,9 +23,10 @@ public interface ProductRepository {
     List<Product> getAllProducts();
 
     @Select("""
-            INSERT INTO product (name, price, specifications, in_stock)
-                VALUES (#{product.name}, #{product.price}, #{product.specifications}, #{product.inStock}) RETURNING *;
-            """)
+           INSERT INTO product (name, price, specifications, in_stock)
+                VALUES (#{product.name}, #{product.price}, #{product.specifications, typeHandler=com.example.spring_homework002.config.ListJsonbTypeHandler}::jsonb, #{product.inStock})
+           RETURNING *;
+       """)
     @ResultMap("productMapping")
     Product createProduct(@Param("product") ProductRequest productRequest);
 }
