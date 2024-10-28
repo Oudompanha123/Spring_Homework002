@@ -22,9 +22,8 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getAllProducts();
     }
     @Override
-    public Product createProduct(ProductRequest productRequest) {
+    public void createProduct(ProductRequest productRequest) {
         System.out.println("Create product: " + productRequest);
         System.out.println("Get new product: " + productRepository.createProduct(productRequest));
-        return productRepository.createProduct(productRequest);
     }
 }

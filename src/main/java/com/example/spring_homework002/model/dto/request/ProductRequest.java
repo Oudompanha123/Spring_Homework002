@@ -1,6 +1,7 @@
 package com.example.spring_homework002.model.dto.request;
 
 import com.example.spring_homework002.model.Specification;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class ProductRequest {
     private String name;
 
+    @PositiveOrZero
     private BigDecimal price;
 
     private List<Specification> specifications; // JSONB field

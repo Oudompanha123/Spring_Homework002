@@ -33,10 +33,10 @@ public class ProductController {
     }
     @PostMapping("")
     public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequest productRequest) {
-        Product product = productService.createProduct(productRequest);
+        productService.createProduct(productRequest);
         ApiResponse<?> response = ApiResponse.builder()
                 .message("Add new product")
-                .payload(product)
+                .payload(null)
                 .status(HttpStatus.OK)
                 .time(LocalDateTime.now())
                 .build();
