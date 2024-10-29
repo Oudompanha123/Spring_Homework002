@@ -1,4 +1,3 @@
-
 package com.example.spring_homework002.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
