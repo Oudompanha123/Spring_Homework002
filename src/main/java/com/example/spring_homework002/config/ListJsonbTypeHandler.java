@@ -1,3 +1,4 @@
+
 package com.example.spring_homework002.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -5,7 +6,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +20,12 @@ import java.util.Map;
 @Component
 public class ListJsonbTypeHandler extends BaseTypeHandler<List<Map<String, Object>>> {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final TypeReference<List<Map<String, Object>>> TYPE_REF = new TypeReference<List<Map<String, Object>>>() {};
+    private static final TypeReference<List<Map<String, Object>>> TYPE_REF =
+            new TypeReference<List<Map<String, Object>>>() {};
 
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, List<Map<String, Object>> parameter, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(PreparedStatement ps, int i, List<Map<String, Object>> parameter, JdbcType jdbcType)
+            throws SQLException {
         try {
             ps.setString(i, OBJECT_MAPPER.writeValueAsString(parameter));
         } catch (JsonProcessingException e) {
