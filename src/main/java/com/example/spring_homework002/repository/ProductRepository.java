@@ -24,9 +24,8 @@ public interface ProductRepository {
 
     @Insert("""
             INSERT INTO product (name, price, specifications, in_stock)
-                VALUES (#{product.name}, #{product.price}, #{product.specifications, jdbcType=OTHER}, #{product.inStock});
+                VALUES (#{product.name}, #{product.price}, #{product.specifications, typeHandler=com.example.spring_homework002.config.ListJsonbTypeHandler}::jsonb, #{product.inStock});
             """)
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @ResultMap("productMapping")
     void createProduct(@Param("product") ProductRequest productRequest);
 }

@@ -18,7 +18,6 @@ public class Product {
 
     private BigDecimal price;
 
-    //@Column(columnDefinition = "jsonb")
     private List<Map<String, Object>> specifications; // JSONB field
 
     private Boolean inStock;

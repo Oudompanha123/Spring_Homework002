@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -33,7 +33,7 @@ public class ProductController {
     }
     @PostMapping("")
     public ResponseEntity<?> createProduct(@RequestBody ProductRequest productRequest) {
-        //Product product = productService.createProduct(productRequest);
+        productService.createProduct(productRequest);
         ApiResponse<?> response = ApiResponse.builder()
                 .message("Add new product")
                 .payload(null)

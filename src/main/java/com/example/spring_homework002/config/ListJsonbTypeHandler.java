@@ -7,6 +7,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
+import org.springframework.stereotype.Component;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -16,17 +17,15 @@ import java.util.List;
 import java.util.Map;
 
 @MappedTypes(List.class)
-@MappedJdbcTypes(JdbcType.OTHER)
+@Component
 public class ListJsonbTypeHandler extends BaseTypeHandler<List<Map<String, Object>>> {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final TypeReference<List<Map<String, Object>>> TYPE_REF =
-            new TypeReference<List<Map<String, Object>>>() {};
+    private static final TypeReference<List<Map<String, Object>>> TYPE_REF = new TypeReference<List<Map<String, Object>>>() {};
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, List<Map<String, Object>> parameter, JdbcType jdbcType) throws SQLException {
         try {
-            System.out.println("Inserting List as JSON: " + parameter);
-            ps.setObject(i, OBJECT_MAPPER.writeValueAsString(parameter), java.sql.Types.OTHER);
+            ps.setString(i, OBJECT_MAPPER.writeValueAsString(parameter));
         } catch (JsonProcessingException e) {
             throw new SQLException("Error converting List to JSON", e);
         }
