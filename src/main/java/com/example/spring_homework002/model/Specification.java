@@ -1,19 +1,25 @@
 package com.example.spring_homework002.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Specification {
-    private Map<String, Object> specification;
+    private BigInteger code;
+    private String description;
+
+    public Specification(BigInteger code, String description) {
+        this.code = code;
+        this.description = description;
+    }
 
     @Override
-    public String toString() {
-        return "Specification{" +
-                "specification=" + specification +
-                '}';
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

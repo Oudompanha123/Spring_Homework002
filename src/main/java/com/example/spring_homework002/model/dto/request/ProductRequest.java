@@ -19,11 +19,11 @@ public class ProductRequest {
     @PositiveOrZero (message = "Price cannot be with negative value")
     private BigDecimal price;
 
-    private List<Map<String, Object>> specifications; // JSONB field
+    private List<Specification> specifications; // JSONB field
 
     private Boolean inStock;
 
-    public ProductRequest(String name, BigDecimal price, List<Map<String, Object>> specifications, Boolean inStock) {
+    public ProductRequest(String name, BigDecimal price, List<Specification> specifications, Boolean inStock) {
         this.name = name;
         this.price = price;
         this.specifications = specifications;
